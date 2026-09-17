@@ -22,6 +22,6 @@ class Site(Base):
     __tablename__ = "sites"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
-    project_id = Column(Integer, ForeignKey("project.id"))
+    project_id = Column(Integer, ForeignKey("projects.id"))
     geometry = Column(Geometry(geometry_type="POLYGON", srid=4326))
     project = relationship("Project", back_populates="sites")
