@@ -1,8 +1,9 @@
 import { useControl } from 'react-map-gl/mapbox';
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
+import { useEffect } from 'react';
 
 export default function DrawControl(props) {
-    useControl(
+    const draw = useControl(
         () => new MapboxDraw(props),
         ({map}) => {
             map.on('draw.create', props.onCreate)
@@ -20,5 +21,12 @@ export default function DrawControl(props) {
             position: props.position
         }
     )
+
+    useEffect(() => {
+        if (props.onControlCreated && draw) {
+            props.onControlCreated(draw);
+        }
+    }, [draw, props.onControlCreated]);
+
     return null;
 }

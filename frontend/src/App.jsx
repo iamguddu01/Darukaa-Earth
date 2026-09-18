@@ -47,25 +47,26 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className='min-h-screen bg-gray-50 flex flex-col font-sans'></div>
-      <Navigation/>
-      <main className='flex-1 w-full mx-auto'>
-        <Routes>
-          <Route path='/' element={<Landing/>}/>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/signup' element={<Signup/>}/>
-          <Route 
-            path='/dashboard'
-            element={
-              <PrivateRoute>
-                <div className='max-w-7xl mx-auto p-4 sm:p-6 lg:p-8'>
-                  <Dashboard/>
-                </div>
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      </main>
+      <div className='min-h-screen bg-gray-50 flex flex-col font-sans'>
+        <Navigation/>
+        <main className='flex-1 w-full mx-auto'>
+          <Routes>
+            <Route path='/' element={<Landing/>}/>
+            <Route path='/login' element={<Login/>}/>
+            <Route path='/signup' element={<Signup/>}/>
+            <Route 
+              path='/dashboard'
+              element={
+                <PrivateRoute>
+                  <div className='max-w-7xl mx-auto p-4 sm:p-6 lg:p-8'>
+                    <Dashboard/>
+                  </div>
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </main>
+      </div>
     </BrowserRouter>
   )
 }

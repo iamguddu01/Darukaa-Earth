@@ -16,6 +16,7 @@ function Dashboard() {
     const [showModal, setShowModal] = useState(false)
     const [newProjectName, setNewProjectName] = useState("")
     const [newProjectDesc, setNewProjectDesc] = useState("")
+    const [drawInstance, setDrawInstance] = useState(null)
 
     useEffect(()=>{
         fetchProjects()
@@ -78,7 +79,7 @@ function Dashboard() {
         }
     },[])
 
-    const charData = {
+    const chartData = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             label: 'Carbon offset (Tons)',
@@ -122,9 +123,27 @@ function Dashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 bg-white shadow-sm rounded-lg border border-gray-100 overflow-hidden flex flex-col h-[600px]">
-          <div className="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
-            <h3 className="text-lg font-medium text-gray-900">Interactive Map</h3>
-            <span className="text-xs text-gray-500">Use drawing tools to create sites</span>
+          <div className="p-4 border-b border-gray-100 bg-gray-50">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div>
+                <h3 className="text-lg font-medium text-gray-900">Interactive Map</h3>
+                <p className="mt-1 text-sm text-gray-500 max-w-md">
+                  Click the "Select Area" button to start drawing a project site. Click on the map to place corners, and click the first point to finish.
+                </p>
+              </div>
+              <button
+                onClick={() => {
+                  if (drawInstance) drawInstance.changeMode('draw_polygon');
+                  else alert("Map is still loading, please wait.");
+                }}
+                className="inline-flex items-center gap-2 rounded-md bg-emerald-100 px-4 py-2 text-sm font-semibold text-emerald-700 shadow-sm hover:bg-emerald-200 transition-colors border border-emerald-300"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+                Select Area
+              </button>
+            </div>
           </div>
           <div className="flex-1 w-full relative">
             <Map
@@ -142,6 +161,7 @@ function Dashboard() {
                 onUpdate={() => {}}
                 onDelete={() => {}}
                 onSelectionChange={onDrawSelectionChange}
+                onControlCreated={setDrawInstance}
               />
             </Map>
           </div>
