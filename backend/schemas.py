@@ -20,7 +20,7 @@ class ProjectOut(BaseModel):
     description: str
     
     class Config:
-        from_attributes: True
+        from_attributes = True
         
 class SiteCreate(BaseModel):
     name: str
