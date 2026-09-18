@@ -5,6 +5,7 @@ bcrypt==3.2.2
 cffi==2.1.1
 click==8.5.0
 fastapi==0.141.1
+gunicorn==21.2.0
 GeoAlchemy2==0.20.0
 h11==0.16.0
 idna==3.19
